@@ -1,10 +1,32 @@
 \documentclass[twocolumn, aps, prd, 10pt, nofootinbib]{revtex4-2}
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage[spanish,es-noshorthands]{babel}
+\usepackage [latin1]{inputenc}
 \let\ls\lstinline
-\usepackage{amsmath, amssymb, graphicx, float, hyperref, booktabs, eulervm, geometry, microtype, siunitx}
+\usepackage{
+	amsmath, amssymb, graphicx, float, hyperref, booktabs, eulervm,
+	geometry, microtype, siunitx, pgfplots, pgfplotstable, cleveref,
+	listings, setspace, xcolor
+}
 
 \geometry{margin=1.7cm}
+
+\lstset{ 
+	language=Matlab,						% El lenguaje de programación a mostrar
+	basicstyle=\ttfamily\small,				% Estilo básico de fuente
+	keywordstyle=\color{blue},				% Color de palabras clave
+	commentstyle=\color{green!50!black},	% Color de comentarios
+	stringstyle=\color{red},				% Color de strings
+	numbers=left,							% Números de línea a la izquierda
+	numberstyle=\tiny,						% Estilo de los números de línea
+	frame=single,							% Cuadro alrededor del código
+	breaklines=true,						% Romper líneas largas
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{\textquestiondown}}1 {¡}{{\textexclamdown}}1
+             {_}{{\_}}1						% Manejo del castellano
+}
 
 \makeatletter
 \renewcommand{\date}[1]{\gdef\@date{\textnormal{Fecha: #1}}}
@@ -29,13 +51,81 @@
 Introducción.
 \section{Fundamento teórico}
 Fundamento teórico.
+
+\begin{equation}
+  E = mc^2
+\end{equation}
+
+\begin{align}
+  x + y &= 10, \\
+  2x - y &= 3.
+\end{align}
+
+\begin{equation}
+  \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix}
+  \begin{bmatrix}
+    x \\ y
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+  \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+\end{equation}
+
+\begin{equation}
+  \frac{d^2y}{dx^2} + 3 \frac{dy}{dx} + 2y = 0
+\end{equation}
+
 \section{Resultados}
 Resultados.
+
+
+\begin{table}[H]
+  \centering
+  \caption{Datos desde un archivo CSV}
+  \pgfplotstabletypeset[
+    col sep=comma,
+    display columns/0/.style={column name={Variable X}},
+    display columns/1/.style={column name={Variable Y}},
+    every head row/.style={before row=\toprule, after row=\midrule},
+    every last row/.style={after row=\bottomrule}
+  ]{datos.csv}
+  \label{tabla:csv}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \caption{Gráfico de ejemplo a partir de un archivo de datos}
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Eje X},
+      ylabel={Eje Y},
+      grid=major,
+      width=0.45\textwidth
+    ]
+      \addplot table [col sep=comma, x index=0, y index=1] {datos.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \label{fig:ejemplo}
+\end{figure}
+
 \section{Conclusiones}
 Conclusiones.
 
 \bibliographystyle{apsrev4-2}
 \bibliography{referencias}
 
+\newpage
+\appendix
+\section{Código}
+
+\lstinputlisting[caption={sample.m - Cálculo de la raíz cuadrada de un vector en MATLAB}, label={lst:sample}]{sample.m}
 
 \end{document}
