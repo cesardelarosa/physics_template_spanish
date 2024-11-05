@@ -1,31 +1,37 @@
 \documentclass[twocolumn, aps, prd, 10pt, nofootinbib]{revtex4-2}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+%\usepackage[protrusion=true, expansion=true]{microtype}
 \usepackage[spanish,es-noshorthands]{babel}
-\usepackage [latin1]{inputenc}
 \let\ls\lstinline
 \usepackage{
-	amsmath, amssymb, graphicx, float, hyperref, booktabs, eulervm,
-	geometry, microtype, siunitx, pgfplots, pgfplotstable, cleveref,
-	listings, setspace, xcolor
+	amsmath, amssymb, graphicx, float, hyperref, booktabs, geometry, siunitx,
+	pgfplots, pgfplotstable, cleveref, listings, setspace, xcolor, tikz
 }
 
+\pgfplotsset{compat=1.18}
 \geometry{margin=1.7cm}
 
 \lstset{ 
-	language=Matlab,						% El lenguaje de programación a mostrar
-	basicstyle=\ttfamily\small,				% Estilo básico de fuente
-	keywordstyle=\color{blue},				% Color de palabras clave
-	commentstyle=\color{green!50!black},	% Color de comentarios
-	stringstyle=\color{red},				% Color de strings
-	numbers=left,							% Números de línea a la izquierda
-	numberstyle=\tiny,						% Estilo de los números de línea
-	frame=single,							% Cuadro alrededor del código
-	breaklines=true,						% Romper líneas largas
+    language=Matlab,								% El lenguaje de programación a mostrar
+    basicstyle=\ttfamily\small\color{black!90},		% Fuente principal
+    keywordstyle=\color{cyan!70!black}\bfseries,	% Color y estilo de palabras clave
+    commentstyle=\color{green!50!black}\itshape,	% Color y estilo de comentarios
+    stringstyle=\color{magenta!90!black},			% Color de strings
+    numbers=left,									% Números de línea a la izquierda
+    numberstyle=\tiny\color{gray},					% Estilo de los números de línea
+    frame=lines,									% Cuadro superior e inferior
+    rulecolor=\color{black!20},						% Color de los bordes
+    backgroundcolor=\color{black!5},				% Fondo del código
+    breaklines=true,								% Romper líneas largas
+    breakatwhitespace=false,						% Romper en espacios en blanco
+    showstringspaces=false,							% No mostrar espacios en strings
+    tabsize=4,										% Tamaño de tabulación
     literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
              {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
              {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{\textquestiondown}}1 {¡}{{\textexclamdown}}1
-             {_}{{\_}}1						% Manejo del castellano
+             {_}{{\_}}1,							% Manejo del castellano
+    captionpos=b									% Posición del título del código (abajo)
 }
 
 \makeatletter
@@ -53,8 +59,9 @@ Introducción.
 Fundamento teórico.
 
 \begin{equation}
-  E = mc^2
+	E = mc^2
 \end{equation}
+\cite{einstein1905}
 
 \begin{align}
   x + y &= 10, \\
@@ -122,10 +129,13 @@ Conclusiones.
 \bibliographystyle{apsrev4-2}
 \bibliography{referencias}
 
-\newpage
+\cleardoublepage
 \appendix
 \section{Código}
 
+\begin{figure}[H]
+\centering
 \lstinputlisting[caption={sample.m - Cálculo de la raíz cuadrada de un vector en MATLAB}, label={lst:sample}]{sample.m}
+\end{figure}
 
 \end{document}
